@@ -7,5 +7,6 @@ data class FootballTile (
         val descriptionLong: String = "",
         val buttonText: String = "",
         val headerImageID: Int = 0,
-        val headerImageUrl: String? = null
-)
+        val headerImageUrl: String? = null,
+        val teamUrl: String = ""
+):java.io.Serializable

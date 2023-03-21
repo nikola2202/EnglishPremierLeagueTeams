@@ -11,7 +11,7 @@ import com.google.android.material.button.MaterialButton
 
 class FootballTileAdapter(
     private val data: ArrayList<FootballTile>,
-    private val footballtileInterface: FootballTileInterface
+    private val footballTileInterface: FootballTileInterface
     ): RecyclerView.Adapter<FootballTileAdapter.FootballTileViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FootballTileViewHolder {
@@ -23,7 +23,7 @@ class FootballTileAdapter(
     }
 
     override fun onBindViewHolder(holder: FootballTileViewHolder, position: Int) {
-        holder.onBind(data[position],footballtileInterface)
+        holder.onBind(data[position],footballTileInterface)
     }
 
     inner class FootballTileViewHolder(parent: ViewGroup): RecyclerView.ViewHolder
@@ -33,16 +33,16 @@ class FootballTileAdapter(
                 {
                     val headerImageView: ImageView = itemView.findViewById(R.id.teamHeaderImageView)
                     val titleTextView: TextView = itemView.findViewById(R.id.titleTextView)
-                    val desriptionTextView: TextView = itemView.findViewById(R.id.descriptionTextView)
+                    val descriptionTextView: TextView = itemView.findViewById(R.id.descriptionTextView)
                     val button: MaterialButton = itemView.findViewById(R.id.button)
 
-                    fun onBind(footballTIle:FootballTile,footballtileInterface: FootballTileInterface) {
-                        headerImageView.setImageResource(footballTIle.headerImageID)
-                        titleTextView.text = footballTIle.title
-                        desriptionTextView.text = footballTIle.description
+                    fun onBind(footballTile:FootballTile,footballTileInterface: FootballTileInterface) {
+                        headerImageView.setImageResource(footballTile.headerImageID)
+                        titleTextView.text = footballTile.title
+                        descriptionTextView.text = footballTile.description
 
                         button.setOnClickListener{
-                            footballtileInterface.onLearnMoreButtonClicked(adapterPosition)
+                            footballTileInterface.onLearnMoreButtonClicked(adapterPosition)
                         }
                     }
                 }
