@@ -54,6 +54,15 @@
             app:layout_constraintStart_toStartOf="@id/titleTextView"
             app:layout_constraintTop_toBottomOf="@+id/titleTextView"
             />
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/favouriteImageView"
+            app:layout_constraintBottom_toBottomOf="@+id/button"
+            app:layout_constraintStart_toStartOf="@+id/titleTextView"
+            app:layout_constraintTop_toTopOf="@+id/button"
+            android:src="@drawable/ic_favorite_outline_24dp"
+            />
         <com.google.android.material.button.MaterialButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

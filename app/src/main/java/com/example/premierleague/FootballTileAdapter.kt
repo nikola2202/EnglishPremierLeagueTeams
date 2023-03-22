@@ -6,6 +6,7 @@ import android.view.ViewParent
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 
@@ -31,10 +32,11 @@ class FootballTileAdapter(
                 LayoutInflater.from(parent.context).inflate(R.layout.view_holder,parent,false)
             )
                 {
-                    val headerImageView: ImageView = itemView.findViewById(R.id.teamHeaderImageView)
-                    val titleTextView: TextView = itemView.findViewById(R.id.titleTextView)
-                    val descriptionTextView: TextView = itemView.findViewById(R.id.descriptionTextView)
-                    val button: MaterialButton = itemView.findViewById(R.id.button)
+                    private val headerImageView: ImageView = itemView.findViewById(R.id.teamHeaderImageView)
+                    private val titleTextView: TextView = itemView.findViewById(R.id.titleTextView)
+                    private val descriptionTextView: TextView = itemView.findViewById(R.id.descriptionTextView)
+                    private val button: MaterialButton = itemView.findViewById(R.id.button)
+                    private val favouriteImageView: AppCompatImageView = itemView.findViewById(R.id.favouriteImageView)
 
                     fun onBind(footballTile:FootballTile,footballTileInterface: FootballTileInterface) {
                         headerImageView.setImageResource(footballTile.headerImageID)
@@ -44,6 +46,12 @@ class FootballTileAdapter(
                         button.setOnClickListener{
                             footballTileInterface.onLearnMoreButtonClicked(adapterPosition)
                         }
+                        val icon = if(footballTile.isFavourite) R.drawable.ic_favourite_24dp else R.drawable.ic_favorite_outline_24dp
+                        favouriteImageView.setImageResource(icon)
+                        favouriteImageView.setOnClickListener {
+                            footballTileInterface.onFavouriteClicked(adapterPosition)
+                        }
+
                     }
                 }
 

@@ -7,7 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity(),FootballTileInterface {
 
-    private lateinit var footballTileList: ArrayList<FootballTile>
+    companion object {
+        lateinit var footballTileList: ArrayList<FootballTile>
+    }
+
+    private lateinit var footballTileAdapter:FootballTileAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,7 +20,7 @@ class MainActivity : AppCompatActivity(),FootballTileInterface {
         supportActionBar?.title = "Premier league teams"
         footballTileList = getList()
 
-        val footballTileAdapter = FootballTileAdapter(footballTileList,this)
+        footballTileAdapter = FootballTileAdapter(footballTileList,this)
         val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
         recyclerView.adapter = footballTileAdapter
 
@@ -28,12 +32,18 @@ class MainActivity : AppCompatActivity(),FootballTileInterface {
 
         val footballTile = footballTileList[position]
         val intent = Intent(this,DetailActivity::class.java).apply {
-            putExtra("footballTile",footballTile)
+            putExtra("footballTileId",footballTile.id)
         }
         startActivity(intent)
     }
 
-        fun getList(): ArrayList<FootballTile> {
+    override fun onFavouriteClicked(position: Int) {
+        val footballTile = footballTileList[position]
+        footballTile.isFavourite = !footballTile.isFavourite
+        footballTileAdapter.notifyItemChanged(position)
+    }
+
+    fun getList(): ArrayList<FootballTile> {
                 return ArrayList<FootballTile>().apply {
             add(
                 FootballTile(
