@@ -3,44 +3,44 @@ package com.example.premierleague
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.commit
 import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity(),FootballTileInterface {
 
-    companion object {
-        lateinit var footballTileList: ArrayList<FootballTile>
-    }
-
-    private lateinit var footballTileAdapter:FootballTileAdapter
+    lateinit var footballTileList: ArrayList<FootballTile>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        supportActionBar?.title = "Premier league teams"
         footballTileList = getList()
 
-        footballTileAdapter = FootballTileAdapter(footballTileList,this)
-        val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
-        recyclerView.adapter = footballTileAdapter
-
-        footballTileAdapter.notifyDataSetChanged()
-
+        supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            add(R.id.fragment_container_view,ListFragment())
         }
 
+    }
     override fun onLearnMoreButtonClicked(position: Int) {
 
         val footballTile = footballTileList[position]
-        val intent = Intent(this,DetailActivity::class.java).apply {
-            putExtra("footballTileId",footballTile.id)
+        supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            addToBackStack(null)
+            val bundle = Bundle().apply {
+                putString("footballTileId",footballTile.id)
+            }
+            replace(R.id.fragment_container_view,DetailFragment().apply {
+                arguments = bundle
+            })
         }
-        startActivity(intent)
     }
 
     override fun onFavouriteClicked(position: Int) {
         val footballTile = footballTileList[position]
         footballTile.isFavourite = !footballTile.isFavourite
-        footballTileAdapter.notifyItemChanged(position)
+        (supportFragmentManager.fragments[0] as? ListFragment)?.onFavouriteClicked(position)
     }
 
     fun getList(): ArrayList<FootballTile> {
