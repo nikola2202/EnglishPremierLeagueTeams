@@ -41,6 +41,9 @@ class MainActivity : AppCompatActivity(),FootballTileInterface {
         val footballTile = footballTileList[position]
         footballTile.isFavourite = !footballTile.isFavourite
         (supportFragmentManager.fragments[0] as? ListFragment)?.onFavouriteClicked(position)
+
+        SharedPreferencesUtil.setFootballTileFavourite(footballTile.id,footballTile.isFavourite)
+
     }
 
     fun getList(): ArrayList<FootballTile> {
@@ -53,8 +56,9 @@ class MainActivity : AppCompatActivity(),FootballTileInterface {
                     descriptionLong = "Some more text",
                     buttonText = "Learn more",
                     headerImageID = R.drawable.manu_header,
-                    headerImageUrl = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2Fmanchester-united-twitter-header--526499012685938517%2F&psig=AOvVaw2alYWUKsYcrwW5wTTcJLcO&ust=1678970864376000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCKCihYL83f0CFQAAAAAdAAAAABAE",
-                    teamUrl = "https://www.manutd.com/"
+                    headerImageUrl = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMAIUwsvyM47GmKXA-vPrQZUGraAz4ffZSICgQkaiAUA&s",
+                    teamUrl = "https://www.manutd.com/",
+                    isFavourite = SharedPreferencesUtil.getFootballTileFavourite("manchester_united")
                 ))
             add(
                 FootballTile(
@@ -64,8 +68,9 @@ class MainActivity : AppCompatActivity(),FootballTileInterface {
                     descriptionLong = "Some more text",
                     buttonText = "Learn more",
                     headerImageID = R.drawable.mancity_header,
-                    headerImageUrl = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2Fmanchester-city-twitter-header--707909635156348947%2F&psig=AOvVaw1cmYpy1KUXxIY6Yzv06_59&ust=1678971065055000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCMDW2OH83f0CFQAAAAAdAAAAABAD",
-                    teamUrl = "https://www.mancity.com/"
+                    headerImageUrl = "https://i.pinimg.com/originals/8f/11/48/8f11480ce075ee1ad4f006f8e4f2be8d.jpg",
+                    teamUrl = "https://www.mancity.com/",
+                    isFavourite = SharedPreferencesUtil.getFootballTileFavourite("manchester_city")
                 ))
             add(
                 FootballTile(
@@ -75,19 +80,21 @@ class MainActivity : AppCompatActivity(),FootballTileInterface {
                     descriptionLong = "Some more text",
                     buttonText = "Learn more",
                     headerImageID = R.drawable.chelsea_header,
-                    headerImageUrl = "https://www.google.com/url?sa=i&url=https%3A%2F%2Ff-edits.tumblr.com%2Fpost%2F150435158577%2Fchelsea-twitter-header&psig=AOvVaw1tSVL-iEgPg2RJg4hTVm7J&ust=1678971413026000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCNjMsYf-3f0CFQAAAAAdAAAAABAb",
-                    teamUrl = "https://www.chelseafc.com/"
+                    headerImageUrl = "https://64.media.tumblr.com/4163bc45d59f167c164b84cc7cfd5f9c/tumblr_od5gi53Zgi1ude0uno1_500h.jpg",
+                    teamUrl = "https://www.chelseafc.com/",
+                    isFavourite = SharedPreferencesUtil.getFootballTileFavourite("chelsea")
                 ))
             add(
                 FootballTile(
-                    id = "liverpul",
-                    title = "Liverpul",
+                    id = "liverpool",
+                    title = "Liverpool",
                     description = "SOME TEXT",
                     descriptionLong = "Some more text",
                     buttonText = "Learn more",
                     headerImageID = R.drawable.liverpul_header,
-                    headerImageUrl = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fsportsteamhistory.com%2Fthe-rich-and-glorious-liverpool-fc-history%2F&psig=AOvVaw0BP21VfaKcIK0i1H83iH__&ust=1678971367043000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCMiyuPH93f0CFQAAAAAdAAAAABAE",
-                    teamUrl = "https://www.liverpool.com/"
+                    headerImageUrl = "https://pbs.twimg.com/media/CrVea3NVMAAEhKn?format=jpg&name=4096x4096",
+                    teamUrl = "https://www.liverpool.com/",
+                    isFavourite = SharedPreferencesUtil.getFootballTileFavourite("liverpool")
                 ))
             add(
                 FootballTile(
@@ -97,8 +104,9 @@ class MainActivity : AppCompatActivity(),FootballTileInterface {
                     descriptionLong = "Some more text",
                     buttonText = "Learn more",
                     headerImageID = R.drawable.tottenham_header,
-                    headerImageUrl = "https://www.google.com/url?sa=i&url=https%3A%2F%2Ff-edits.tumblr.com%2Fpost%2F151100205100%2Ftottenham-hotspur-twitter-header&psig=AOvVaw3uEzg6hNnvGVlNis3dyO54&ust=1678971236205000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCIDJorP93f0CFQAAAAAdAAAAABAE",
-                    teamUrl = "https://www.tottenhamhotspur.com/"
+                    headerImageUrl = "https://i.pinimg.com/736x/a5/91/3b/a5913b877183e02ab86b2d59708c565a.jpg",
+                    teamUrl = "https://www.tottenhamhotspur.com/",
+                    isFavourite = SharedPreferencesUtil.getFootballTileFavourite("tottenham")
                 ))
             add(
                 FootballTile(
@@ -108,8 +116,9 @@ class MainActivity : AppCompatActivity(),FootballTileInterface {
                     descriptionLong = "Some more text",
                     buttonText = "Learn more",
                     headerImageID = R.drawable.arsenal_header,
-                    headerImageUrl = "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2F707909635156348949%2F&psig=AOvVaw2YE-1pIp80Ar8NJsj-MeTT&ust=1678971297205000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCOinrND93f0CFQAAAAAdAAAAABAE",
-                    teamUrl = "https://www.arsenal.com/"
+                    headerImageUrl = "https://i.pinimg.com/originals/00/b9/57/00b957e908fd86d72b3e014892d4b895.jpg",
+                    teamUrl = "https://www.arsenal.com/",
+                    isFavourite = SharedPreferencesUtil.getFootballTileFavourite("arsenal")
                 ))
             add(
                 FootballTile(
@@ -119,8 +128,9 @@ class MainActivity : AppCompatActivity(),FootballTileInterface {
                     descriptionLong = "Some more text",
                     buttonText = "Learn more",
                     headerImageID = R.drawable.leicester_header,
-                    headerImageUrl = "https://www.google.com/url?sa=i&url=https%3A%2F%2Ftwitter.com%2FF_Edits%2Fstatus%2F773110666102267904&psig=AOvVaw2-4MnDqeHcked6Jy0sICRl&ust=1678971151825000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCNimkYv93f0CFQAAAAAdAAAAABAF",
-                    teamUrl = "https://www.lcfc.com/"
+                    headerImageUrl = "https://pbs.twimg.com/media/Crqj7hGW8AAhXJW.jpg",
+                    teamUrl = "https://www.lcfc.com/",
+                    isFavourite = SharedPreferencesUtil.getFootballTileFavourite("leicester")
                 ))
 
         }

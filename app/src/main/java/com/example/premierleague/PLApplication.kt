@@ -11,6 +11,9 @@ class PLApplication:Application() {
     override fun onCreate() {
         super.onCreate()
         application = this
+
+        SharedPreferencesUtil.init(this)
+
     }
 
 }

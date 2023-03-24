@@ -12,6 +12,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
+import com.squareup.picasso.Picasso
 
 class DetailFragment: BaseMainActivityFragment(R.layout.fragment_detail) {
 
@@ -35,10 +36,17 @@ class DetailFragment: BaseMainActivityFragment(R.layout.fragment_detail) {
         val descriptionTextView: TextView = view.findViewById(R.id.descriptionTextView)
         val descriptionLong: TextView = view.findViewById(R.id.descriptionLongTextView)
 
-        headerImage.setImageResource(footballTile.headerImageID)
+        //headerImage.setImageResource(footballTile.headerImageID)
         titleTextView.text = footballTile.title
         descriptionTextView.text = footballTile.description
         descriptionLong.text = footballTile.descriptionLong
+
+        Picasso.get().isLoggingEnabled = true
+        Picasso.get()
+            .load(footballTile.headerImageUrl)
+            .placeholder(R.mipmap.ic_launcher_square)
+            .into(headerImage)
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -72,6 +80,7 @@ class DetailFragment: BaseMainActivityFragment(R.layout.fragment_detail) {
                 }
 
                 footballTile.isFavourite = !isCurrentFavourite
+                SharedPreferencesUtil.setFootballTileFavourite(footballTile.id,footballTile.isFavourite)
                 true
             }
 
