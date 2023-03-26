@@ -31,6 +31,12 @@ class MainActivity : AppCompatActivity(),FootballTileInterface {
             val bundle = Bundle().apply {
                 putString("footballTileId",footballTile.id)
             }
+
+            setCustomAnimations(
+                R.anim.fragment_slide_right,
+                R.anim.fragment_slide_out_left
+            )
+
             replace(R.id.fragment_container_view,DetailFragment().apply {
                 arguments = bundle
             })
